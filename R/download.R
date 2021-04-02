@@ -382,7 +382,7 @@ download_all <- function(
     # download all data types for each questionnaire
     purrr::walk(
         .x = dplyr::pull(qnrs, .data$QuestionnaireIdentity),
-        .f = ~ download_all_data_types(
+        .f = ~ download_all_types(
             # describe job
             qnr_id = .x, 
             interview_status = interview_status,
