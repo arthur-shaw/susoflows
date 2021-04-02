@@ -1,0 +1,33 @@
+Package: susoflows
+Title: Executes common workflows with Survey Solutions' API
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Arthur",
+           family = "Shaw",
+           role = c("aut", "cre"),
+           email = "jashaw2002@gmail.com",
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: Executes common workflows in Survey Solutions. Through simple functions, this package helps implement common--and often complex--workflows. Rather than execute several API calls manually, users can use a simple function.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Imports: 
+    assertthat,
+    dplyr,
+    lubridate,
+    purrr,
+    rlang,
+    stringr,
+    susoapi (>= 0.0.0.9000),
+    tibble
+Remotes: 
+    github::arthur-shaw/susoapi
+Suggests: 
+    vcr,
+    testthat (>= 3.0.0),
+    knitr,
+    rmarkdown
+Config/testthat/edition: 3
+VignetteBuilder: knitr

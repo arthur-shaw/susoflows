@@ -1,0 +1,21 @@
+home:
+  title: Execute common workflows with Survey Solutions' API
+
+reference:
+- title: "Download"
+  desc: >
+    Functions for downloading data.
+- contents:
+  - download_data
+  - download_matching
+  - find_matching_qnrs
+  - download_all_types
+  - download_all
+
+- title: "Monitor"
+  desc: >
+    Functions for gathering metadata on interviewers
+- contents:
+  - get_last_sync_dates
+  - get_all_user_logs
+  - calc_last_user_sync

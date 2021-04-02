@@ -1,0 +1,64 @@
+---
+title: "Introduction to susoflows"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to susoflows}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  eval = FALSE,  
+  comment = "#>"
+)
+```
+
+```{r setup, include = FALSE, echo=FALSE}
+library(susoflows)
+```
+
+
+## Authentication
+
+The `susoflows` packages uses the same authentication as `susoapi`. To set credentials, use `susoapi` as follows:
+
+```{r set_credentials}
+# set credentials for connecting with the server
+set_credentials(
+  server = "https://example.server",
+  user = "My_API_user1",
+  password = "MySecretPassword2Day"
+)
+```
+
+Then, `susoflows` functions can use those credentials:
+
+```{r get_logs}
+# use those credentials without needing to specify them again
+action_logs <- get_all_user_logs(
+  start = "2021-01-01",
+  end = "2021-04-01"
+)
+```
+
+
+Alternatively, one can simply specify the `server`, `user`, and `password` parameters to any `susoflows` function.
+
+## Usage
+
+The `susoflows` package aims to encapsulate common or complex Survey Solutions workflows in single functions. Functions currently cover two domains:
+
+1. Downloading
+1. Monitoring
+
+### Downloading
+
+With a single function, one can download by questionnaire ID (`download_data`) or by questionnaire title (`download_matching`). With other single functions, one can download all types of data for one questionnaire (`download_all_data_types`) or all data types for all questionnaires (`download_all`)
+
+If data download fails, functions will help users recover. For `download_matching`, for example, will inform the user if no matching questionnaires are found, and `find_matching_qnrs` will return matching questionnaires in order to help users refine their searches.
+
+### Monitoring
+
+With single function, one can also collect user action logs. With `get_all_user_logs`, one collects the logs into a data frame. With `get_last_sync_dates`, one collects the logs, parses them, and returns a data frame of the last sync dates for each interviewer.
