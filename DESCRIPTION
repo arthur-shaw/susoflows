@@ -5,8 +5,7 @@ Authors@R:
     person(given = "Arthur",
            family = "Shaw",
            role = c("aut", "cre"),
-           email = "jashaw2002@gmail.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+           email = "jashaw2002@gmail.com")
 Description: Executes common workflows in Survey Solutions. Through simple functions, this package helps implement common--and often complex--workflows. Rather than execute several API calls manually, users can use a simple function.
 License: MIT + file LICENSE
 Encoding: UTF-8
