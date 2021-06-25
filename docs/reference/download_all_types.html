@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">susoflows</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9001</span>
       </span>
     </div>
 
@@ -92,7 +92,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/arthur-shaw/susoflows/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -107,7 +112,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Download all export types for a given questionnaire.</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/arthur-shaw/susoflows/blob/master/R/download.R'><code>R/download.R</code></a></small>
     <div class="hidden name"><code>download_all_types.Rd</code></div>
     </div>
 
@@ -126,6 +131,7 @@
   translation_id <span class='op'>=</span> <span class='st'>""</span>,
   include_meta <span class='op'>=</span> <span class='cn'>TRUE</span>,
   <span class='va'>path</span>,
+  workspace <span class='op'>=</span> <span class='st'>"primary"</span>,
   server <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"SUSO_SERVER"</span><span class='op'>)</span>,
   user <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"SUSO_USER"</span><span class='op'>)</span>,
   password <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"SUSO_PASSWORD"</span><span class='op'>)</span>
@@ -173,6 +179,10 @@
     <tr>
       <th>path</th>
       <td><p>File path where export file should be downloaded</p></td>
+    </tr>
+    <tr>
+      <th>workspace</th>
+      <td><p>Character. Name of the workspace whose data to download.</p></td>
     </tr>
     <tr>
       <th>server</th>

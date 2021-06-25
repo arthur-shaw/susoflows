@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">susoflows</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9001</span>
       </span>
     </div>
 
@@ -92,7 +92,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/arthur-shaw/susoflows/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -107,7 +112,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Get list of questionnaires with a matching title.</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/arthur-shaw/susoflows/blob/master/R/download.R'><code>R/download.R</code></a></small>
     <div class="hidden name"><code>find_matching_qnrs.Rd</code></div>
     </div>
 
@@ -117,6 +122,7 @@
 
     <pre class="usage"><span class='fu'>find_matching_qnrs</span><span class='op'>(</span>
   <span class='va'>matches</span>,
+  workspace <span class='op'>=</span> <span class='st'>"primary"</span>,
   server <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"SUSO_SERVER"</span><span class='op'>)</span>,
   user <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"SUSO_USER"</span><span class='op'>)</span>,
   password <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"SUSO_PASSWORD"</span><span class='op'>)</span>
@@ -128,6 +134,10 @@
     <tr>
       <th>matches</th>
       <td><p>Atomic character vector. Character string to be detected in questionnaire title. May be a string, sub-string, or regex.</p></td>
+    </tr>
+    <tr>
+      <th>workspace</th>
+      <td><p>Character. Name of the workspace whose questionnaires to query.</p></td>
     </tr>
     <tr>
       <th>server</th>

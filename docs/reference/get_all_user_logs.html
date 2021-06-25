@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">susoflows</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9001</span>
       </span>
     </div>
 
@@ -92,7 +92,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/arthur-shaw/susoflows/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -107,7 +112,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Obtains action logs for all interviewer users</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/arthur-shaw/susoflows/blob/master/R/monitor.R'><code>R/monitor.R</code></a></small>
     <div class="hidden name"><code>get_all_user_logs.Rd</code></div>
     </div>
 
@@ -118,6 +123,7 @@
     <pre class="usage"><span class='fu'>get_all_user_logs</span><span class='op'>(</span>
   <span class='va'>start</span>,
   <span class='va'>end</span>,
+  workspace <span class='op'>=</span> <span class='st'>"primary"</span>,
   server <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"SUSO_SERVER"</span><span class='op'>)</span>,
   user <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"SUSO_USER"</span><span class='op'>)</span>,
   password <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"SUSO_PASSWORD"</span><span class='op'>)</span>
@@ -133,6 +139,10 @@
     <tr>
       <th>end</th>
       <td><p>Character vector. Date in YYY-MM-DD format</p></td>
+    </tr>
+    <tr>
+      <th>workspace</th>
+      <td><p>Character. Workspace whose action logs to get.</p></td>
     </tr>
     <tr>
       <th>server</th>
