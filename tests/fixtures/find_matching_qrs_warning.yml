@@ -1,7 +1,7 @@
 http_interactions:
 - request:
     method: get
-    uri: <<<fake_server>>>api/v1/questionnaires?offset=1&limit=1
+    uri: <<<fake_server>>>api/v1/workspaces?Start=0&Length=1&IncludeDisabled=false
     body:
       encoding: ''
       string: ''
@@ -22,17 +22,16 @@ http_interactions:
       vary: Accept-Encoding
       server: Kestrel
       x-powered-by: ASP.NET
-      date: Tue, 30 Mar 2021 22:07:55 GMT
+      date: Fri, 25 Jun 2021 15:55:11 GMT
     body:
       encoding: UTF-8
       file: no
-      string: '{"Questionnaires":[{"QuestionnaireIdentity":"5495bfd5f2324b3a8a75c80056f1898e$1","QuestionnaireId":"5495bfd5-f232-4b3a-8a75-c80056f1898e","Version":1,"Title":"EHCVM
-        2 - qnr modèle ménage","Variable":"menage","LastEntryDate":"2021-03-12T12:43:12.37157","IsAudioRecordingEnabled":true,"WebModeEnabled":false}],"Order":"","Limit":1,"TotalCount":5,"Offset":1}'
-  recorded_at: 2021-03-30 22:07:56 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.8.0
+      string: '{"Workspaces":[{"Name":"another","DisplayName":"Another workspace","DisabledAtUtc":null}],"Order":null,"Limit":1,"TotalCount":2,"Offset":0}'
+  recorded_at: 2021-06-25 15:55:12 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.0
 - request:
     method: get
-    uri: <<<fake_server>>>api/v1/questionnaires?offset=1&limit=40
+    uri: <<<fake_server>>>api/v1/workspaces?Start=0&Length=20&IncludeDisabled=false
     body:
       encoding: ''
       string: ''
@@ -53,15 +52,53 @@ http_interactions:
       vary: Accept-Encoding
       server: Kestrel
       x-powered-by: ASP.NET
-      date: Tue, 30 Mar 2021 22:07:55 GMT
+      date: Fri, 25 Jun 2021 15:55:11 GMT
     body:
       encoding: UTF-8
       file: no
-      string: '{"Questionnaires":[{"QuestionnaireIdentity":"5495bfd5f2324b3a8a75c80056f1898e$1","QuestionnaireId":"5495bfd5-f232-4b3a-8a75-c80056f1898e","Version":1,"Title":"EHCVM
-        2 - qnr modèle ménage","Variable":"menage","LastEntryDate":"2021-03-12T12:43:12.37157","IsAudioRecordingEnabled":true,"WebModeEnabled":false},{"QuestionnaireIdentity":"e71bcb42a2aa420fa7e95f0ddc791b91$1","QuestionnaireId":"e71bcb42-a2aa-420f-a7e9-5f0ddc791b91","Version":1,"Title":"GAMBIA
-        COVID-19 Wave 5","Variable":"GAMBIA_COVID_19Wave5","LastEntryDate":"2021-03-22T19:35:28.946888","IsAudioRecordingEnabled":false,"WebModeEnabled":false},{"QuestionnaireIdentity":"e71bcb42a2aa420fa7e95f0ddc791b91$2","QuestionnaireId":"e71bcb42-a2aa-420f-a7e9-5f0ddc791b91","Version":2,"Title":"GAMBIA
-        COVID-19 Wave 5","Variable":"GAMBIA_COVID_19Wave5","LastEntryDate":"2021-03-24T14:31:04.874186","IsAudioRecordingEnabled":false,"WebModeEnabled":false},{"QuestionnaireIdentity":"e71bcb42a2aa420fa7e95f0ddc791b91$3","QuestionnaireId":"e71bcb42-a2aa-420f-a7e9-5f0ddc791b91","Version":3,"Title":"GAMBIA
-        COVID-19 Wave 5","Variable":"GAMBIA_COVID_19Wave5","LastEntryDate":"2021-03-24T18:32:36.976164","IsAudioRecordingEnabled":false,"WebModeEnabled":false},{"QuestionnaireIdentity":"5ab793ffc84a4211858df168bbd90cf9$1","QuestionnaireId":"5ab793ff-c84a-4211-858d-f168bbd90cf9","Version":1,"Title":"nesting
-        test","Variable":"nesting","LastEntryDate":"2021-01-19T20:12:11.690377","IsAudioRecordingEnabled":false,"WebModeEnabled":false}],"Order":"","Limit":40,"TotalCount":5,"Offset":1}'
-  recorded_at: 2021-03-30 22:07:56 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.8.0
+      string: '{"Workspaces":[{"Name":"another","DisplayName":"Another workspace","DisabledAtUtc":null},{"Name":"primary","DisplayName":"Default
+        Workspace","DisabledAtUtc":null}],"Order":null,"Limit":20,"TotalCount":2,"Offset":0}'
+  recorded_at: 2021-06-25 15:55:12 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.0
+- request:
+    method: post
+    uri: <<<fake_server>>>/graphql
+    body:
+      encoding: ''
+      string: '{"query":"{    questionnaires (workspace: \"primary\") {        nodes
+        {            id            questionnaireId            version            variable            title            defaultLanguageName            translations
+        {                id                name            }        }        filteredCount       }}"}'
+    headers:
+      User-Agent: libcurl/7.64.1 r-curl/4.3.2 crul/1.1.0
+      Content-Type: application/json
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      authorization: Basic YWRtaW46TXlMZXlsYUxvdmVzTWUyRGF5
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      transfer-encoding: chunked
+      content-type: application/json; charset=utf-8
+      content-encoding: gzip
+      content-language: en-US
+      vary: Accept-Encoding
+      server: Kestrel
+      x-powered-by: ASP.NET
+      date: Fri, 25 Jun 2021 15:55:11 GMT
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"data":{"questionnaires":{"nodes":[{"id":"5495bfd5f2324b3a8a75c80056f1898e$1","questionnaireId":"5495bfd5f2324b3a8a75c80056f1898e","version":1,"variable":"menage","title":"EHCVM
+        2 - qnr mod\u00E8le m\u00E9nage","defaultLanguageName":null,"translations":[]},{"id":"5ab793ffc84a4211858df168bbd90cf9$1","questionnaireId":"5ab793ffc84a4211858df168bbd90cf9","version":1,"variable":"nesting","title":"nesting
+        test","defaultLanguageName":null,"translations":[]},{"id":"e71bcb42a2aa420fa7e95f0ddc791b91$1","questionnaireId":"e71bcb42a2aa420fa7e95f0ddc791b91","version":1,"variable":"GAMBIA_COVID_19Wave5","title":"GAMBIA
+        COVID-19 Wave 5","defaultLanguageName":null,"translations":[]},{"id":"e71bcb42a2aa420fa7e95f0ddc791b91$2","questionnaireId":"e71bcb42a2aa420fa7e95f0ddc791b91","version":2,"variable":"GAMBIA_COVID_19Wave5","title":"GAMBIA
+        COVID-19 Wave 5","defaultLanguageName":null,"translations":[]},{"id":"e71bcb42a2aa420fa7e95f0ddc791b91$3","questionnaireId":"e71bcb42a2aa420fa7e95f0ddc791b91","version":3,"variable":"GAMBIA_COVID_19Wave5","title":"GAMBIA
+        COVID-19 Wave 5","defaultLanguageName":null,"translations":[]},{"id":"5f9881014a7843aa871444584093c74d$1","questionnaireId":"5f9881014a7843aa871444584093c74d","version":1,"variable":"GAMBIA_COVID_19Wave6","title":"GAMBIA
+        COVID-19 Wave 6","defaultLanguageName":null,"translations":[]},{"id":"b4382cca82314e8a87b0b1acf8e1ac6c$1","questionnaireId":"b4382cca82314e8a87b0b1acf8e1ac6c","version":1,"variable":"no_interviews","title":"I
+        have no interviews","defaultLanguageName":null,"translations":[]}],"filteredCount":7}}}'
+  recorded_at: 2021-06-25 15:55:12 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.0

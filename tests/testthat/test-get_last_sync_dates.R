@@ -36,10 +36,12 @@ test_that("Error if end date invalid", {
 
 test_that("Returns df with expected columns", {
 
-    x <- suppressMessages(get_last_sync_dates(
-        start = "2021-02-01", 
-        end = "2021-03-31"
-    ))
+    x <- suppressMessages(
+        get_last_sync_dates(
+            start = "2021-02-01", 
+            end = "2021-03-31"
+        )
+    )
         
     expect_s3_class(x, c("tbl_df","tbl","data.frame"))
     expect_named(x, c("UserId", "last_sync_date"), 

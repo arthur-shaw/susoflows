@@ -52,9 +52,7 @@ action_logs <- get_all_user_logs(start = "2021-02-01", end = "2021-03-31")
 
 test_that("Data frame with expected columns of expected type", {
 
-    vcr::use_cassette("calc_last_user_sync_input_df", {
-        x <- calc_last_user_sync(df = action_logs)
-    })
+    x <- calc_last_user_sync(df = action_logs)
 
     expect_s3_class(x, c("tbl_df","tbl","data.frame"))
     expect_named(x, 

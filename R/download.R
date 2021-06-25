@@ -1,41 +1,47 @@
 
 #' Get list of questionnaires with a matching title.
 #'
-#' Get a data frame of questionnaires that match the character vector provided. 
-#' 
+#' Get a data frame of questionnaires that match the character vector provided.
+#'
 #' If matching questionnaires are found, return a data frame with attributes. These attributes can be used, among other things, to find the necessary parameters for downloading any associated data.
-#' 
-#' If no matching questionnaires are found, return a warning message. 
-#' 
+#'
+#' If no matching questionnaires are found, return a warning message.
+#'
 #' In both cases, print the outcome to the console for information.
 #'
 #' @param matches Atomic character vector. Character string to be detected in questionnaire title. May be a string, sub-string, or regex.
+#' @param workspace Character. Name of the workspace whose questionnaires to query.
 #' @param server Full server web address (e.g., \code{https://demo.mysurvey.solutions}, \code{https://my.domain})
 #' @param user API user name
 #' @param password API password
-#' 
+#'
 #' @return Data frame of matching questionnaires, if successful; warning message, if not successful.
-#' 
+#'
 #' @importFrom susoapi get_questionnaires
 #' @importFrom dplyr filter
 #' @importFrom rlang .data
 #' @importFrom stringr str_detect
 #' @importFrom tibble as_tibble
-#' 
-#' @export 
+#'
+#' @export
 find_matching_qnrs <- function(
     matches,
+    workspace = "primary",
     server = Sys.getenv("SUSO_SERVER"),     # full server address
     user = Sys.getenv("SUSO_USER"),         # API user name
-    password = Sys.getenv("SUSO_PASSWORD")  # API password 
+    password = Sys.getenv("SUSO_PASSWORD")  # API password
 ) {
 
     # get list of all questionnaires
-    qnrs <- susoapi::get_questionnaires(server = server, user = user, password = password)
+    qnrs <- susoapi::get_questionnaires(
+        workspace = workspace, 
+        server = server, 
+        user = user, 
+        password = password
+    )
 
     # find those questionnaires that match
-    qnrs_found <- dplyr::filter(qnrs, stringr::str_detect(.data$Title, matches))
-
+    qnrs_found <- dplyr::filter(qnrs, stringr::str_detect(.data$title, matches))
 
     num_qnrs_found <- nrow(qnrs_found)
     if (num_qnrs_found > 0) {
@@ -44,7 +50,7 @@ find_matching_qnrs <- function(
             "Found ", num_qnrs_found, " matching questionnaires."
         ))
 
-        qnrs_match_to_print <- dplyr::select(qnrs_found, .data$Title, .data$Variable, .data$QuestionnaireIdentity)
+        qnrs_match_to_print <- dplyr::select(qnrs_found, .data$title, .data$version, .data$variable, .data$questionnaireId)
         print(tibble::as_tibble(qnrs_match_to_print))
 
         return(qnrs_found)
@@ -76,19 +82,20 @@ find_matching_qnrs <- function(
 #' @param translation_id Translation ID for variable and value labels to include in export files.
 #' @param include_meta Logical. If `TRUE`, include questionnaire metadata in export file.
 #' @param path File path where export file should be downloaded
+#' @param workspace Character. Name of the workspace whose data to download.
 #' @param server Full server web address (e.g., \code{https://demo.mysurvey.solutions}, \code{https://my.domain})
 #' @param user API user name
 #' @param password API password
-#' 
+#'
 #' @importFrom purrr walk
 #' @importFrom rlang .data
-#' 
-#' @export 
-download_matching <- function( 
+#'
+#' @export
+download_matching <- function(
     # questionnaire name
     matches,
     # describe job
-    export_type,    
+    export_type,
     interview_status = "All",
     from = "",
     to = "",
@@ -98,8 +105,9 @@ download_matching <- function(
     translation_id = "",
     include_meta = TRUE,
     # download path
-    path,    
+    path,
     # credentials
+    workspace = "primary",
     server = Sys.getenv("SUSO_SERVER"),     # full server address
     user = Sys.getenv("SUSO_USER"),         # API user name
     password = Sys.getenv("SUSO_PASSWORD")  # API password
@@ -110,7 +118,8 @@ download_matching <- function(
     # if not, throw and error with the warning from `find_matching_qnrs`
     qnrs_found <- tryCatch(
         find_matching_qnrs(
-            matches = matches, 
+            matches = matches,
+            workspace = workspace,
             server = server,
             user = user,
             password = password
@@ -124,11 +133,11 @@ download_matching <- function(
     # walk through vector of questionnaire IDs
     # download file to path
     purrr::walk(
-        .x = pull(qnrs_found, .data$QuestionnaireIdentity),
+        .x = pull(qnrs_found, .data$id),
         .f = ~ download_data(
             # describe job
             qnr_id = .x,
-            export_type = export_type,    
+            export_type = export_type,
             interview_status = interview_status,
             from = from,
             to = to,
@@ -138,8 +147,9 @@ download_matching <- function(
             translation_id = translation_id,
             include_meta = include_meta,
             # download path
-            path = path,    
+            path = path,
             # credentials
+            workspace = workspace,
             server = server,
             user = user,
             password = password
@@ -150,10 +160,10 @@ download_matching <- function(
 
 #' Download data for a single export job.
 #'
-#' Executes full download process for a single export job. 
-#' 
+#' Executes full download process for a single export job.
+#'
 #' 1. **Starts export job.** Specifies the parameters of the download job through the `qnr_id`, `export_type`, `interview_status`,  `from`, `to`, `access_token`, `refresh_token`, `storage_type`, `translation_id`, and `include_meta` parameters
-#' 2. **Gets regular updates on the progress of the export job.** Messages about progress. 
+#' 2. **Gets regular updates on the progress of the export job.** Messages about progress.
 #' 3. **Downloads file to desired destination.** Use the `path` parameter to specify where the export file should be saved.
 #'
 #' @param qnr_id Questionnaire ID. Format: \code{qnr_id$version}
@@ -167,17 +177,18 @@ download_matching <- function(
 #' @param translation_id Translation ID for variable and value labels to include in export files.
 #' @param include_meta Logical. If `TRUE`, include questionnaire metadata in export file.
 #' @param path File path where export file should be downloaded
+#' @param workspace Character. Name of the workspace whose data to download.
 #' @param server Full server web address (e.g., \code{https://demo.mysurvey.solutions}, \code{https://my.domain})
 #' @param user API user name
 #' @param password API password
-#' 
+#'
 #' @importFrom susoapi start_export get_export_job_details get_export_file
-#' 
+#'
 #' @export
 download_data <- function(
     # describe job
     qnr_id,
-    export_type,    
+    export_type,
     interview_status = "All",
     from = "",
     to = "",
@@ -187,8 +198,9 @@ download_data <- function(
     translation_id = "",
     include_meta = TRUE,
     # download path
-    path,    
+    path,
     # credentials
+    workspace = "primary",
     server = Sys.getenv("SUSO_SERVER"),     # full server address
     user = Sys.getenv("SUSO_USER"),         # API user name
     password = Sys.getenv("SUSO_PASSWORD")  # API password
@@ -222,9 +234,10 @@ download_data <- function(
 
         # inquire about job status
         job_status <- susoapi::get_export_job_details(
-            job_id = job_id, 
-            server = server, 
-            user = user, 
+            job_id = job_id,
+            workspace = workspace,
+            server = server,
+            user = user,
             password = password
         )
 
@@ -257,19 +270,20 @@ download_data <- function(
     # when finished fetch file
     message("Downloading file")
     susoapi::get_export_file(
-        job_id = job_id, 
-        path = path, 
-        server = server, 
-        user = user, 
+        job_id = job_id,
+        path = path,
+        workspace = workspace,
+        server = server,
+        user = user,
         password = password
     )
 
 }
 
 #' Download all export types for a given questionnaire.
-#' 
+#'
 #' Downloads tab-delimited, Stata, SPSS, binary, DDI, and Paradata for a given questionnaire version.
-#' 
+#'
 #' @param qnr_id Questionnaire ID. Format: \code{qnr_id$version}
 #' @param interview_status Status of interviews to export. Values: \code{c("All", "SupervisorAssigned", "InterviewerAssigned", "Completed", "RejectedBySupervisor", "ApprovedBySupervisor", "RejectedByHeadquarters", "ApprovedByHeadquarters")}
 #' @param from Start date for interviews to export. date-time, UTC
@@ -280,13 +294,14 @@ download_data <- function(
 #' @param translation_id Translation ID for variable and value labels to include in export files.
 #' @param include_meta Logical. If `TRUE`, include questionnaire metadata in export file.
 #' @param path File path where export file should be downloaded
+#' @param workspace Character. Name of the workspace whose data to download.
 #' @param server Full server web address (e.g., \code{https://demo.mysurvey.solutions}, \code{https://my.domain})
 #' @param user API user name
 #' @param password API password
-#' 
+#'
 #' @importFrom purrr walk
-#' 
-#' @export 
+#'
+#' @export
 download_all_types <- function(
     # describe job
     qnr_id,
@@ -299,11 +314,12 @@ download_all_types <- function(
     translation_id = "",
     include_meta = TRUE,
     # download path
-    path,    
+    path,
     # credentials
+    workspace = "primary",
     server = Sys.getenv("SUSO_SERVER"),     # full server address
     user = Sys.getenv("SUSO_USER"),         # API user name
-    password = Sys.getenv("SUSO_PASSWORD")  # API password  
+    password = Sys.getenv("SUSO_PASSWORD")  # API password
 ) {
 
     export_types <- c("Tabular", "STATA", "SPSS", "Binary", "DDI", "Paradata")
@@ -313,7 +329,7 @@ download_all_types <- function(
         .f = ~ download_data(
             # describe job
             qnr_id = qnr_id,
-            export_type = .x,    
+            export_type = .x,
             interview_status = interview_status,
             from = from,
             to = to,
@@ -323,8 +339,9 @@ download_all_types <- function(
             translation_id = translation_id,
             include_meta = include_meta,
             # download path
-            path = path,    
+            path = path,
             # credentials
+            workspace = workspace,
             server = server,
             user = user,
             password = password
@@ -334,11 +351,11 @@ download_all_types <- function(
 }
 
 #' Download all export types for all questionnaires
-#' 
+#'
 #' Useful at project close, this function downloads tab-delimited, Stata, SPSS, binary, DDI, and Paradata for every questionnaire version.
-#' 
+#'
 #' Beware: this function may long-running if binary data, such as audio, are captured for many or all interviews.
-#' 
+#'
 #' @param interview_status Status of interviews to export. Values: \code{c("All", "SupervisorAssigned", "InterviewerAssigned", "Completed", "RejectedBySupervisor", "ApprovedBySupervisor", "RejectedByHeadquarters", "ApprovedByHeadquarters")}
 #' @param from Start date for interviews to export. date-time, UTC
 #' @param to End date for interviews to export. date-time, UTC
@@ -348,16 +365,17 @@ download_all_types <- function(
 #' @param translation_id Translation ID for variable and value labels to include in export files.
 #' @param include_meta Logical. If `TRUE`, include questionnaire metadata in export file.
 #' @param path File path where export file should be downloaded
+#' @param workspace Character. Name of the workspace whose data to download.
 #' @param server Full server web address (e.g., \code{https://demo.mysurvey.solutions}, \code{https://my.domain})
 #' @param user API user name
 #' @param password API password
-#' 
+#'
 #' @importFrom susoapi get_questionnaires
 #' @importFrom dplyr pull
 #' @importFrom purrr walk
 #' @importFrom rlang .data
-#' 
-#' @export 
+#'
+#' @export
 download_all <- function(
     # describe job
     interview_status = "All",
@@ -369,22 +387,28 @@ download_all <- function(
     translation_id = "",
     include_meta = TRUE,
     # download path
-    path,    
+    path,
     # credentials
+    workspace = "primary",
     server = Sys.getenv("SUSO_SERVER"),     # full server address
     user = Sys.getenv("SUSO_USER"),         # API user name
-    password = Sys.getenv("SUSO_PASSWORD")  # API password  
+    password = Sys.getenv("SUSO_PASSWORD")  # API password
 ) {
 
     # get list of all questionnaires
-    qnrs <- susoapi::get_questionnaires(server = server, user = user, password = password)
+    qnrs <- susoapi::get_questionnaires(
+        workspace = workspace,
+        server = server, 
+        user = user, 
+        password = password
+    )
 
     # download all data types for each questionnaire
     purrr::walk(
-        .x = dplyr::pull(qnrs, .data$QuestionnaireIdentity),
+        .x = dplyr::pull(qnrs, .data$id),
         .f = ~ download_all_types(
             # describe job
-            qnr_id = .x, 
+            qnr_id = .x,
             interview_status = interview_status,
             from = from,
             to = to,
@@ -394,8 +418,9 @@ download_all <- function(
             translation_id = translation_id,
             include_meta = include_meta,
             # download path
-            path = path,    
+            path = path,
             # credentials
+            workspace = workspace,
             server = server,
             user = user,
             password = password

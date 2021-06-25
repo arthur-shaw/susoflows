@@ -37,8 +37,8 @@ qnrs <- susoapi::get_questionnaires()
 
 file_names <- qnrs %>%
     dplyr::rename(
-        qnr_variable = Variable,
-        qnr_version = Version
+        qnr_variable = variable,
+        qnr_version = version
     ) %>%
     dplyr::select(qnr_variable, qnr_version) %>%
     purrr::pmap_dfc(

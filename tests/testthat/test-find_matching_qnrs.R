@@ -39,9 +39,10 @@ test_that("Returns df of qnrs with exepected columns", {
 
     expect_s3_class(x, c("tbl_df","tbl","data.frame"))
     expect_named(x, c(
-        "QuestionnaireIdentity", "QuestionnaireId", "Version", 
-        "Title", "Variable", "LastEntryDate", 
-        "IsAudioRecordingEnabled", "WebModeEnabled"), 
+            "id", "questionnaireId", "version", 
+            "variable", "title", 
+            "defaultLanguageName", "translations"
+        ), 
         ignore.order = TRUE)
 
 })

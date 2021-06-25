@@ -7,6 +7,7 @@
 get_last_sync_dates(
   start,
   end,
+  workspace = "primary",
   server = Sys.getenv("SUSO_SERVER"),
   user = Sys.getenv("SUSO_USER"),
   password = Sys.getenv("SUSO_PASSWORD")
@@ -16,6 +17,8 @@ get_last_sync_dates(
 \item{start}{Character vector. Date in YYY-MM-DD format}
 
 \item{end}{Character vector. Date in YYY-MM-DD format}
+
+\item{workspace}{Character. Workspace whose action logs to get.}
 
 \item{server}{Full server web address (e.g., \code{https://demo.mysurvey.solutions}, \code{https://my.domain})}
 

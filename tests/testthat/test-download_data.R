@@ -10,10 +10,10 @@
 
 # get name of file
 qnrs <- find_matching_qnrs(matches = "^EHCVM")
-qnr_id_version <- qnrs$QuestionnaireIdentity
-qnr_title <- qnrs$Title
-qnr_variable <- qnrs$Variable
-qnr_version <- qnrs$Version
+qnr_id_version <- qnrs$id
+qnr_title <- qnrs$title
+qnr_variable <- qnrs$variable
+qnr_version <- qnrs$version
 qnr_export <- "STATA"
 
 # compose file name

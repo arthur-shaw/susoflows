@@ -16,6 +16,7 @@ download_data(
   translation_id = "",
   include_meta = TRUE,
   path,
+  workspace = "primary",
   server = Sys.getenv("SUSO_SERVER"),
   user = Sys.getenv("SUSO_USER"),
   password = Sys.getenv("SUSO_PASSWORD")
@@ -43,6 +44,8 @@ download_data(
 \item{include_meta}{Logical. If \code{TRUE}, include questionnaire metadata in export file.}
 
 \item{path}{File path where export file should be downloaded}
+
+\item{workspace}{Character. Name of the workspace whose data to download.}
 
 \item{server}{Full server web address (e.g., \code{https://demo.mysurvey.solutions}, \code{https://my.domain})}
 
