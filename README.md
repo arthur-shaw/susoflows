@@ -8,8 +8,7 @@
 
 The goal of `susoflows` is to provide simple functions for common and
 complex workflows with Survey Solutions. Rather than chain together
-several `susoapi` commands, one can instead issue one `susoflows`
-command.
+several `susoapi` commands, use one `susoflows` command instead.
 
 ## Installation
 
@@ -17,6 +16,7 @@ The package is not yet on CRAN, but can be installed via the following
 command:
 
 ``` r
+# install.packages("devtools")
 devtools::install_github("arthur-shaw/susoflows")
 ```
 
