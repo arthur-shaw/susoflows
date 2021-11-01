@@ -20,11 +20,9 @@
 # message
 test_that("Issues message that qnrs found", {
 
-    vcr::use_cassette("find_matching_qrs_msg", {
-        expect_message(find_matching_qnrs(
-            matches = "^EHCVM"
-        ))
-    })
+    expect_message(find_matching_qnrs(
+        matches = "^EHCVM"
+    ))    
 
 })
 
