@@ -219,6 +219,7 @@ download_data <- function(
         translation_id = translation_id,
         include_meta = include_meta,
         server = server,
+        workspace = workspace,
         user = user,
         password = password
     )
