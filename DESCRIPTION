@@ -19,7 +19,7 @@ Imports:
     purrr,
     rlang,
     stringr,
-    susoapi (>= 0.1.1),
+    susoapi (>= 0.1.3),
     tibble
 Remotes: 
     github::arthur-shaw/susoapi
