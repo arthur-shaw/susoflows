@@ -14,8 +14,8 @@ download_all(
   translation_id = "",
   include_meta = TRUE,
   path,
-  workspace = "primary",
   server = Sys.getenv("SUSO_SERVER"),
+  workspace = Sys.getenv("SUSO_WORKSPACE"),
   user = Sys.getenv("SUSO_USER"),
   password = Sys.getenv("SUSO_PASSWORD")
 )
@@ -39,9 +39,9 @@ download_all(
 
 \item{path}{File path where export file should be downloaded}
 
-\item{workspace}{Character. Name of the workspace whose data to download.}
-
 \item{server}{Full server web address (e.g., \code{https://demo.mysurvey.solutions}, \code{https://my.domain})}
+
+\item{workspace}{Character. Name of the workspace whose data to download.}
 
 \item{user}{API user name}
 

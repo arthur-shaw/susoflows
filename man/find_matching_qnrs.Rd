@@ -6,8 +6,8 @@
 \usage{
 find_matching_qnrs(
   matches,
-  workspace = "primary",
   server = Sys.getenv("SUSO_SERVER"),
+  workspace = Sys.getenv("SUSO_WORKSPACE"),
   user = Sys.getenv("SUSO_USER"),
   password = Sys.getenv("SUSO_PASSWORD")
 )
@@ -15,9 +15,9 @@ find_matching_qnrs(
 \arguments{
 \item{matches}{Atomic character vector. Character string to be detected in questionnaire title. May be a string, sub-string, or regex.}
 
-\item{workspace}{Character. Name of the workspace whose questionnaires to query.}
-
 \item{server}{Full server web address (e.g., \code{https://demo.mysurvey.solutions}, \code{https://my.domain})}
+
+\item{workspace}{Character. Name of the workspace whose questionnaires to query.}
 
 \item{user}{API user name}
 

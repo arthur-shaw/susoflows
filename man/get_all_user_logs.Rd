@@ -7,8 +7,8 @@
 get_all_user_logs(
   start,
   end,
-  workspace = "primary",
   server = Sys.getenv("SUSO_SERVER"),
+  workspace = Sys.getenv("SUSO_WORKSPACE"),
   user = Sys.getenv("SUSO_USER"),
   password = Sys.getenv("SUSO_PASSWORD")
 )
@@ -18,9 +18,9 @@ get_all_user_logs(
 
 \item{end}{Character vector. Date in YYY-MM-DD format}
 
-\item{workspace}{Character. Workspace whose action logs to get.}
-
 \item{server}{Full server web address (e.g., \code{https://demo.mysurvey.solutions}, \code{https://my.domain})}
+
+\item{workspace}{Character. Workspace whose action logs to get.}
 
 \item{user}{API user name}
 
