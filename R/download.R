@@ -10,8 +10,8 @@
 #' In both cases, print the outcome to the console for information.
 #'
 #' @param matches Atomic character vector. Character string to be detected in questionnaire title. May be a string, sub-string, or regex.
-#' @param workspace Character. Name of the workspace whose questionnaires to query.
 #' @param server Full server web address (e.g., \code{https://demo.mysurvey.solutions}, \code{https://my.domain})
+#' @param workspace Character. Name of the workspace whose questionnaires to query.
 #' @param user API user name
 #' @param password API password
 #'
@@ -26,16 +26,16 @@
 #' @export
 find_matching_qnrs <- function(
     matches,
-    workspace = "primary",
     server = Sys.getenv("SUSO_SERVER"),     # full server address
+    workspace = Sys.getenv("SUSO_WORKSPACE"),
     user = Sys.getenv("SUSO_USER"),         # API user name
     password = Sys.getenv("SUSO_PASSWORD")  # API password
 ) {
 
     # get list of all questionnaires
     qnrs <- susoapi::get_questionnaires(
-        workspace = workspace, 
         server = server, 
+        workspace = workspace, 
         user = user, 
         password = password
     )
@@ -82,8 +82,8 @@ find_matching_qnrs <- function(
 #' @param translation_id Translation ID for variable and value labels to include in export files.
 #' @param include_meta Logical. If `TRUE`, include questionnaire metadata in export file.
 #' @param path File path where export file should be downloaded
-#' @param workspace Character. Name of the workspace whose data to download.
 #' @param server Full server web address (e.g., \code{https://demo.mysurvey.solutions}, \code{https://my.domain})
+#' @param workspace Character. Name of the workspace whose data to download.
 #' @param user API user name
 #' @param password API password
 #'
@@ -107,8 +107,8 @@ download_matching <- function(
     # download path
     path,
     # credentials
-    workspace = "primary",
     server = Sys.getenv("SUSO_SERVER"),     # full server address
+    workspace = Sys.getenv("SUSO_WORKSPACE"),
     user = Sys.getenv("SUSO_USER"),         # API user name
     password = Sys.getenv("SUSO_PASSWORD")  # API password
 ) {
@@ -119,8 +119,8 @@ download_matching <- function(
     qnrs_found <- tryCatch(
         find_matching_qnrs(
             matches = matches,
-            workspace = workspace,
             server = server,
+            workspace = workspace,
             user = user,
             password = password
         ),
@@ -149,8 +149,8 @@ download_matching <- function(
             # download path
             path = path,
             # credentials
-            workspace = workspace,
             server = server,
+            workspace = workspace,
             user = user,
             password = password
         )
@@ -177,8 +177,8 @@ download_matching <- function(
 #' @param translation_id Translation ID for variable and value labels to include in export files.
 #' @param include_meta Logical. If `TRUE`, include questionnaire metadata in export file.
 #' @param path File path where export file should be downloaded
-#' @param workspace Character. Name of the workspace whose data to download.
 #' @param server Full server web address (e.g., \code{https://demo.mysurvey.solutions}, \code{https://my.domain})
+#' @param workspace Character. Name of the workspace whose data to download.
 #' @param user API user name
 #' @param password API password
 #'
@@ -200,8 +200,8 @@ download_data <- function(
     # download path
     path,
     # credentials
-    workspace = "primary",
     server = Sys.getenv("SUSO_SERVER"),     # full server address
+    workspace = Sys.getenv("SUSO_WORKSPACE"),
     user = Sys.getenv("SUSO_USER"),         # API user name
     password = Sys.getenv("SUSO_PASSWORD")  # API password
 ) {
@@ -236,8 +236,8 @@ download_data <- function(
         # inquire about job status
         job_status <- susoapi::get_export_job_details(
             job_id = job_id,
-            workspace = workspace,
             server = server,
+            workspace = workspace,
             user = user,
             password = password
         )
@@ -273,8 +273,8 @@ download_data <- function(
     susoapi::get_export_file(
         job_id = job_id,
         path = path,
-        workspace = workspace,
         server = server,
+        workspace = workspace,
         user = user,
         password = password
     )
@@ -295,8 +295,8 @@ download_data <- function(
 #' @param translation_id Translation ID for variable and value labels to include in export files.
 #' @param include_meta Logical. If `TRUE`, include questionnaire metadata in export file.
 #' @param path File path where export file should be downloaded
-#' @param workspace Character. Name of the workspace whose data to download.
 #' @param server Full server web address (e.g., \code{https://demo.mysurvey.solutions}, \code{https://my.domain})
+#' @param workspace Character. Name of the workspace whose data to download.
 #' @param user API user name
 #' @param password API password
 #'
@@ -317,8 +317,8 @@ download_all_types <- function(
     # download path
     path,
     # credentials
-    workspace = "primary",
     server = Sys.getenv("SUSO_SERVER"),     # full server address
+    workspace = Sys.getenv("SUSO_WORKSPACE"),
     user = Sys.getenv("SUSO_USER"),         # API user name
     password = Sys.getenv("SUSO_PASSWORD")  # API password
 ) {
@@ -342,8 +342,8 @@ download_all_types <- function(
             # download path
             path = path,
             # credentials
-            workspace = workspace,
             server = server,
+            workspace = workspace,
             user = user,
             password = password
         )
@@ -366,8 +366,8 @@ download_all_types <- function(
 #' @param translation_id Translation ID for variable and value labels to include in export files.
 #' @param include_meta Logical. If `TRUE`, include questionnaire metadata in export file.
 #' @param path File path where export file should be downloaded
-#' @param workspace Character. Name of the workspace whose data to download.
 #' @param server Full server web address (e.g., \code{https://demo.mysurvey.solutions}, \code{https://my.domain})
+#' @param workspace Character. Name of the workspace whose data to download.
 #' @param user API user name
 #' @param password API password
 #'
@@ -390,16 +390,16 @@ download_all <- function(
     # download path
     path,
     # credentials
-    workspace = "primary",
     server = Sys.getenv("SUSO_SERVER"),     # full server address
+    workspace = Sys.getenv("SUSO_WORKSPACE"),
     user = Sys.getenv("SUSO_USER"),         # API user name
     password = Sys.getenv("SUSO_PASSWORD")  # API password
 ) {
 
     # get list of all questionnaires
     qnrs <- susoapi::get_questionnaires(
-        workspace = workspace,
         server = server, 
+        workspace = workspace,
         user = user, 
         password = password
     )
@@ -421,8 +421,8 @@ download_all <- function(
             # download path
             path = path,
             # credentials
-            workspace = workspace,
             server = server,
+            workspace = workspace,
             user = user,
             password = password
         )

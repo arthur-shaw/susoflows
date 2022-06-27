@@ -82,8 +82,8 @@ calc_last_user_sync <- function(
 #' 
 #' @param start Character vector. Date in YYY-MM-DD format
 #' @param end Character vector. Date in YYY-MM-DD format
-#' @param workspace Character. Workspace whose action logs to get.
 #' @param server Full server web address (e.g., \code{https://demo.mysurvey.solutions}, \code{https://my.domain})
+#' @param workspace Character. Workspace whose action logs to get.
 #' @param user API user name
 #' @param password API password
 #' 
@@ -96,8 +96,8 @@ calc_last_user_sync <- function(
 get_all_user_logs <- function(
     start,
     end, 
-    workspace = "primary",
     server = Sys.getenv("SUSO_SERVER"),     # full server address
+    workspace = Sys.getenv("SUSO_WORKSPACE"),
     user = Sys.getenv("SUSO_USER"),         # API user name
     password = Sys.getenv("SUSO_PASSWORD")  # API password 
 ) {
@@ -117,8 +117,8 @@ get_all_user_logs <- function(
 
     # fetch list of users
     interviewers <- susoapi::get_interviewers(
-        workspace = workspace,
         server = server, 
+        workspace = workspace,
         user = user, 
         password = password) %>%
         # remove any rows where interviewer missing
@@ -132,8 +132,8 @@ get_all_user_logs <- function(
             user_id = .x,
             start = start,
             end = end,
-            workspace = workspace,
             server = server,
+            workspace = workspace,
             user = user,
             password = password
         )
@@ -157,8 +157,8 @@ get_all_user_logs <- function(
 #' 
 #' @param start Character vector. Date in YYY-MM-DD format
 #' @param end Character vector. Date in YYY-MM-DD format
-#' @param workspace Character. Workspace whose action logs to get.
 #' @param server Full server web address (e.g., \code{https://demo.mysurvey.solutions}, \code{https://my.domain})
+#' @param workspace Character. Workspace whose action logs to get.
 #' @param user API user name
 #' @param password API password
 #' 
@@ -172,8 +172,8 @@ get_all_user_logs <- function(
 get_last_sync_dates <- function(
     start,
     end, 
-    workspace = "primary",
     server = Sys.getenv("SUSO_SERVER"),     # full server address
+    workspace = Sys.getenv("SUSO_WORKSPACE"),
     user = Sys.getenv("SUSO_USER"),         # API user name
     password = Sys.getenv("SUSO_PASSWORD")  # API password 
 ) {
@@ -195,8 +195,8 @@ get_last_sync_dates <- function(
     action_logs <- get_all_user_logs(
         start = start,
         end = end,
-        workspace = workspace,
         server = server,
+        workspace = workspace,
         password = password
     )
 
