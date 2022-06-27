@@ -1,6 +1,6 @@
 Package: susoflows
 Title: Executes common workflows with Survey Solutions' API
-Version: 0.0.0.9001
+Version: 0.1.0
 Authors@R: 
     person(given = "Arthur",
            family = "Shaw",
@@ -11,7 +11,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.0
 Imports: 
     assertthat,
     dplyr,
@@ -19,7 +19,7 @@ Imports:
     purrr,
     rlang,
     stringr,
-    susoapi (>= 0.1.3),
+    susoapi (>= 0.2.0),
     tibble
 Remotes: 
     github::arthur-shaw/susoapi
