@@ -14,7 +14,9 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.0
 Imports: 
     assertthat,
+    cli,
     dplyr,
+    fs,
     lubridate,
     purrr,
     rlang,
@@ -27,7 +29,8 @@ Suggests:
     vcr,
     testthat (>= 3.0.0),
     knitr,
-    rmarkdown
+    rmarkdown,
+    withr
 Config/testthat/edition: 3
 VignetteBuilder: knitr
 URL: https://github.com/arthur-shaw/susoflows
