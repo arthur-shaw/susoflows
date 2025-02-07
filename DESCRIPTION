@@ -1,6 +1,6 @@
 Package: susoflows
 Title: Executes common workflows with Survey Solutions' API
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: 
     person(given = "Arthur",
            family = "Shaw",
