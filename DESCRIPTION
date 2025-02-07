@@ -22,7 +22,8 @@ Imports:
     rlang,
     stringr,
     susoapi (>= 0.2.0),
-    tibble
+    tibble,
+    zip
 Remotes: 
     github::arthur-shaw/susoapi
 Suggests: 

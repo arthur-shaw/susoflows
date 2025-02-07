@@ -17,3 +17,44 @@ create_files_and_subdirs <- function(dir) {
   fs::file_create(file_paths_in_dirs)
 
 }
+
+create_zip_file <- function(
+  dir,
+  file_name
+) {
+
+  # create files to zip
+  paths_files_to_zip <- fs::file_create(
+    path = fs::path(
+      dir,
+      c("file1.txt", "file2.txt")
+    )
+  )
+
+  # create zip archive of previously created files
+  zip::zip(
+    zipfile = fs::path(dir, file_name),
+    files = paths_files_to_zip,
+    mode = "cherry-pick"
+  )
+
+  # delete original files
+  fs::file_delete(path = paths_files_to_zip)
+
+}
+
+create_zip_files <- function(
+  dir,
+  file_names
+) {
+
+  # create one zip file for each name provided
+  purrr::walk(
+    .x = file_names,
+    .f = ~ create_zip_file(
+      dir = dir,
+      file_name = .x
+    )
+  )
+
+}
