@@ -26,3 +26,10 @@ reference:
   - get_last_sync_dates
   - get_all_user_logs
   - calc_last_user_sync
+
+- title: "File system operations"
+  desc: >
+    Functions to streamline actions on files downloaded from Survey Solutions
+- contents:
+  - unzip_to_dir
+  - delete_in_dir

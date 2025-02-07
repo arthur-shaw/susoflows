@@ -1,54 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://arthur-shaw.github.io/susoflows/404.html</loc>
-  </url>
-  <url>
-    <loc>https://arthur-shaw.github.io/susoflows/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://arthur-shaw.github.io/susoflows/articles/susoflows.html</loc>
-  </url>
-  <url>
-    <loc>https://arthur-shaw.github.io/susoflows/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://arthur-shaw.github.io/susoflows/index.html</loc>
-  </url>
-  <url>
-    <loc>https://arthur-shaw.github.io/susoflows/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://arthur-shaw.github.io/susoflows/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://arthur-shaw.github.io/susoflows/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://arthur-shaw.github.io/susoflows/reference/calc_last_user_sync.html</loc>
-  </url>
-  <url>
-    <loc>https://arthur-shaw.github.io/susoflows/reference/download_all.html</loc>
-  </url>
-  <url>
-    <loc>https://arthur-shaw.github.io/susoflows/reference/download_all_types.html</loc>
-  </url>
-  <url>
-    <loc>https://arthur-shaw.github.io/susoflows/reference/download_data.html</loc>
-  </url>
-  <url>
-    <loc>https://arthur-shaw.github.io/susoflows/reference/download_matching.html</loc>
-  </url>
-  <url>
-    <loc>https://arthur-shaw.github.io/susoflows/reference/find_matching_qnrs.html</loc>
-  </url>
-  <url>
-    <loc>https://arthur-shaw.github.io/susoflows/reference/get_all_user_logs.html</loc>
-  </url>
-  <url>
-    <loc>https://arthur-shaw.github.io/susoflows/reference/get_last_sync_dates.html</loc>
-  </url>
-  <url>
-    <loc>https://arthur-shaw.github.io/susoflows/reference/index.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://arthur-shaw.github.io/susoflows/404.html</loc></url>
+<url><loc>https://arthur-shaw.github.io/susoflows/articles/index.html</loc></url>
+<url><loc>https://arthur-shaw.github.io/susoflows/articles/susoflows.html</loc></url>
+<url><loc>https://arthur-shaw.github.io/susoflows/authors.html</loc></url>
+<url><loc>https://arthur-shaw.github.io/susoflows/index.html</loc></url>
+<url><loc>https://arthur-shaw.github.io/susoflows/LICENSE-text.html</loc></url>
+<url><loc>https://arthur-shaw.github.io/susoflows/LICENSE.html</loc></url>
+<url><loc>https://arthur-shaw.github.io/susoflows/news/index.html</loc></url>
+<url><loc>https://arthur-shaw.github.io/susoflows/reference/calc_last_user_sync.html</loc></url>
+<url><loc>https://arthur-shaw.github.io/susoflows/reference/delete_in_dir.html</loc></url>
+<url><loc>https://arthur-shaw.github.io/susoflows/reference/download_all.html</loc></url>
+<url><loc>https://arthur-shaw.github.io/susoflows/reference/download_all_types.html</loc></url>
+<url><loc>https://arthur-shaw.github.io/susoflows/reference/download_data.html</loc></url>
+<url><loc>https://arthur-shaw.github.io/susoflows/reference/download_matching.html</loc></url>
+<url><loc>https://arthur-shaw.github.io/susoflows/reference/find_matching_qnrs.html</loc></url>
+<url><loc>https://arthur-shaw.github.io/susoflows/reference/get_all_user_logs.html</loc></url>
+<url><loc>https://arthur-shaw.github.io/susoflows/reference/get_last_sync_dates.html</loc></url>
+<url><loc>https://arthur-shaw.github.io/susoflows/reference/index.html</loc></url>
+<url><loc>https://arthur-shaw.github.io/susoflows/reference/unzip_to_dir.html</loc></url>
 </urlset>
+
