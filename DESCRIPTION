@@ -1,6 +1,6 @@
 Package: susoflows
 Title: Executes common workflows with Survey Solutions' API
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: 
     person(given = "Arthur",
            family = "Shaw",
@@ -21,7 +21,7 @@ Imports:
     purrr,
     rlang,
     stringr,
-    susoapi (>= 0.3.0),
+    susoapi (>= 0.3.1),
     tibble,
     zip
 Remotes: 

@@ -1,3 +1,7 @@
+# susoflows 0.2.1
+
+Requires `susoapi` version that fixes certain interactions with the GraphQL API--notably getting questionnaires.
+
 # susoflows 0.2.0
 
 Adds functions to perform operations on files downloaded from Survey Solutions:
