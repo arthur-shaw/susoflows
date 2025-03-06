@@ -21,7 +21,7 @@ Imports:
     purrr,
     rlang,
     stringr,
-    susoapi (>= 0.2.0),
+    susoapi (>= 0.3.0),
     tibble,
     zip
 Remotes: 
